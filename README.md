@@ -13,3 +13,5 @@ docker-compose up
 ```
 docker compose up
 ```
+
+Abrir o browser na url localhost:4200
