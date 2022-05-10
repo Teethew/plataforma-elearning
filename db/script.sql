@@ -15,6 +15,7 @@ CREATE TABLE "usuarios" (
 CREATE TABLE "trilhas" (
   "id" INT PRIMARY KEY NOT NULL,
   "owner" INT NOT NULL,
+  "descricao" VARCHAR(100),
   "nome" VARCHAR(100),
   "categoria" VARCHAR(100),
   "capa" VARCHAR(100),

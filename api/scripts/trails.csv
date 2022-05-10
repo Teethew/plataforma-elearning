@@ -1,3 +1,4 @@
-id,owner,nome,descricao,categoria,likes
-1,2,Teoria dos Grafos,Trilha de estudos para a matéria Teoria dos Grafos,Ciência da computação,2
-2,1,Sistemas Operacionais,Trilha de estudos para a matéria Sistemas Operacionais,Ciência da computação,10
+id,owner,nome,descricao,categoria,capa,likes
+1,2,Teoria dos Grafos,Trilha de estudos para a matéria Teoria dos Grafos,Ciência da computação,https://i.imgur.com/plms1Um.jpg,2
+2,1,Sistemas Operacionais,Trilha de estudos para a matéria Sistemas Operacionais,Ciência da computação,https://i.imgur.com/VEtkTXc.png,10
+3,2,Rust desbravado,Desbravando Rust com diversos exemplos práticos,Engenharia de sistemas,https://i.imgur.com/yUPdXs3.png,45
