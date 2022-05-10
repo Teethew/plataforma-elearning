@@ -11,5 +11,8 @@ router.route('/users')
 router.get('/users/:id', controller.read_id)
 router.post('/users/:id/trails', controller.associatedTrails)
 router.post('/users/:id/comments', controller.associatedComments)
+router.post('/users/:id/favorites', controller.associatedFavorites)
+router.post('/users/:id/like', controller.likeTrail)
+router.post('/users/:id/dislike', controller.dislikeTrail)
 
 module.exports = router;

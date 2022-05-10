@@ -1,9 +1,10 @@
 const model = require('../src/api')
+const { Op } = require("sequelize");
 
 const read = (req, res) => {
-  model.Users.findAll(
+  model.Favorites.findAll(
   ).then((data) => {
-    res.send(JSON.stringify(data, null, 4))
+    res.send(data)
   }).catch((error) => {
     console.log(error)
     res.send(error)
@@ -12,18 +13,18 @@ const read = (req, res) => {
 
 const read_id = (req, res) => {
   const id = parseInt(req.params.id)
-  model.Users.findAll({ where: { 'id': id } }
+  model.Favorites.findAll({ where: { 'id': id } }
   ).then((data) => {
     res.send(data)
   }).catch((error) => {
     console.log(error)
     res.send(error)
   })
-}
+};
 
 const associatedTrails = (req, res) => {
   const id = parseInt(req.params.id)
-  const users = model.Users.findAll({ where: { 'id': id }, include: model.Trails }
+  const favorite = model.Favorites.findAll({ where: { 'id': id }, include: model.Trails }
   ).then((data) => {
     res.send(data)
   }).catch((error) => {
@@ -32,21 +33,9 @@ const associatedTrails = (req, res) => {
   })
 }
 
-
-const associatedComments = (req, res) => {
+const associatedUsers = (req, res) => {
   const id = parseInt(req.params.id)
-  const users = model.Users.findAll({ where: { 'id': id }, include: model.Comments }
-  ).then((data) => {
-    res.send(data)
-  }).catch((error) => {
-    console.log(error)
-    res.send(error)
-  })
-}
-
-const associatedFavorites = (req, res) => {
-  const id = parseInt(req.params.id)
-  const users = model.Users.findAll({ where: { 'id': id }, include: model.Favorites }
+  const favorite = model.Favorites.findAll({ where: { 'id': id }, include: model.Users }
   ).then((data) => {
     res.send(data)
   }).catch((error) => {
@@ -58,7 +47,7 @@ const associatedFavorites = (req, res) => {
 // .build().save() == .create()
 const insert = (req, res) => {
   const dados = req.body
-  model.Users.build(dados)
+  model.Favorites.build(dados)
     .save()
     .then((data) => {
       res.send(true)
@@ -70,7 +59,7 @@ const insert = (req, res) => {
 
 const update = (req, res) => {
   const dados = req.body
-  model.Users.update(dados, {
+  model.Favorites.update(dados, {
     where: {
       id: dados.id
     }
@@ -85,7 +74,7 @@ const update = (req, res) => {
 
 const del = (req, res) => {
   const dados = req.body
-  model.Users.destroy({
+  model.Favorites.destroy({
     where: {
       id: dados.id
     }
@@ -98,37 +87,6 @@ const del = (req, res) => {
     })
 }
 
-
-const likeTrail = (req, res) => {
-  const dados = req.body
-  model.Trails.increment({ likes: 1 }, {
-    where: {
-      id: dados.id
-    }
-  })
-    .then((data) => {
-      res.send(true)
-    }).catch((error) => {
-      console.log(error)
-      res.send(false)
-    })
-}
-
-const dislikeTrail = (req, res) => {
-  const dados = req.body
-  model.Trails.increment({ likes: -1 }, {
-    where: {
-      id: dados.id
-    }
-  })
-    .then((data) => {
-      res.send(true)
-    }).catch((error) => {
-      console.log(error)
-      res.send(false)
-    })
-}
-
 module.exports = {
   read
   , read_id
@@ -136,8 +94,5 @@ module.exports = {
   , update
   , del
   , associatedTrails
-  , associatedComments
-  , associatedFavorites
-  , likeTrail
-  , dislikeTrail
+  , associatedUsers
 };
